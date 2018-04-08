@@ -1,0 +1,55 @@
+{% extends "common.html" %}
+
+{% block content %}
+  <div id="faq">
+    <p>
+      <strong>How do you pronounce orcheil?</strong><br />
+      Roughly, oar-kay.
+    </p>
+    
+    <p>
+      <strong>What is it?</strong><br />
+      It's a dye-producing lichen.
+    </p>
+    
+    <p>
+      <strong>No, this site.</strong><br />
+      orcheil is a web app for the visualization of orchestration. The goal is to provide a clear and immediate representation of when an instrument is or is not performing in a piece of music. This can reveal, for instance, the instrumentation of a composite timbre, or the role of orchestration in articulating form. It is a timbre-first visualization of music.
+    </p>
+    
+    <p>
+      <strong>How do I use it?</strong><br />
+      orcheil is driven by symbolic data representing music notation, specifically a MusicXML file. Just upload your file and orcheil will create a visualization of it. You may choose a color palette beforehand if you wish.
+    </p>
+    
+    <p>
+      <strong>I don't have a MusicXML file. Where can I get one?</strong><br />
+      Try <a href="https://musescore.org/" target="_blank">MuseScore</a>.
+    </p>
+    
+    <p>
+      <strong>Does orcheil keep my MusicXML file?</strong><br />
+      No, it doesn't keep anything.
+    </p>
+    
+    <p>
+      <strong>I choose the instrument palette, but one instrument is gray. Why?</strong><br />
+      orcheil uses the instrument name to determine the instrument color, with support for common orchestral instrument names in English, French, German, and Italian. If an instrument is gray in the visualization, it's because the instrument name is unusual, or in an unsupported language, or there's a typo in it.
+    </p>
+
+    <p>
+      <strong>Where are the instrument names?</strong><br />
+      Each path in the visualization has a tooltip containing the instrument name.
+    </p>
+
+    <p>
+      <strong>There may be a problem with orcheil. Who do I contact?</strong><br />
+      Gregory Lee Newsome at greg.newsome@utoronto.ca.
+    </p>
+
+    <p>
+      <strong>What is orcheil built with?</strong><br />
+      <a href="https://www.python.org/" target="_blank">Python</a>, <a href="http://flask.pocoo.org/" target="_blank">Flask</a>, <a href="http://web.mit.edu/music21/" target="_blank">music21</a>, and ❤️.
+    </p>
+  </div>  
+{% endblock content %}

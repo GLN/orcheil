@@ -1,0 +1,35 @@
+{% extends "common.html" %}
+
+{% block content %}
+  <div class="center">
+    <h3>An app for the visualization of orchestration.</h3>
+    
+    <form action="{{ url_for('upload') }}" enctype="multipart/form-data" method="POST">
+      <div id="configure">
+        <fieldset>
+          <label for="palette">Palette:</label>
+          <select name="palette">
+            <option selected value="monochrome">Monochrome</option>
+            <option value="complementary">Complementary</option>
+            <option value="instrument">Instrument</option>
+          </select>
+          <!--
+          <br />
+          <label for="dynamic">Dynamic:</label>
+          <input name="dynamic" type="checkbox" value="show" />
+          -->
+        </fieldset>
+      </div>
+      
+      <div id="submit">
+        <label class="file-upload-button" for="file-upload">Choose MusicXML File</label>
+        <input id="file-upload" name="musicxml" onchange="javascript:this.form.submit()" type="file" />
+      </div>
+    </form>
+    
+    <p id="caution">
+      orcheil is resource-intensive<br />
+      more data = more time
+    </p>
+  </div>
+{% endblock content %}

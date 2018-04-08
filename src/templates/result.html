@@ -1,0 +1,16 @@
+{% extends "common.html" %}
+
+{% block content %}
+  
+  <svg height="{{ score.height }}" width="100%" viewBox="0 0 {{ score.release }} {{ score.height }}" preserveAspectRatio="none">
+    {% for part in score.parts %}
+      {% for path in part.paths %}
+        <path d="{{ path.d }}" opacity={{ path.opacity }} stroke="{{ path.stroke }}" stroke-width="{{ path.stroke_width }}"><title>{{ part.name }}</title></path>
+      {% endfor %}
+    {% endfor %}
+    Sorry, your browser does not support inline SVG.
+  </svg>
+  
+  <p class="center filename"><strong>{{ score.filename }}</strong></p>
+  
+{% endblock content %}

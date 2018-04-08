@@ -1,0 +1,159 @@
+/* layout */
+
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0 2em;
+}
+
+body, html {
+    height: 100%;
+}
+
+#caution {
+    padding-bottom: 0.5em;
+    padding-top: 0;
+}
+
+#configure {
+    padding-bottom: 0em;
+}
+
+fieldset {
+    display: inline-block;
+    padding: 0;
+    text-align: left;
+    /* safari: fieldset won't resize to fit content, so hard value necessary */
+    width: 15.2732em;
+}
+
+fieldset > label {
+    float: left;
+    padding-right: 0.5em;
+}
+
+footer {
+    flex-shrink: 0;
+    margin-top: 0.25em;
+    padding-bottom: 0.75em;
+    padding-top: 0.5em;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 1em 0;
+}
+
+header {
+    display: flex;
+    flex: none;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+p, ul {
+    margin: 0;
+    padding: 0.5em 0;
+}
+
+select {
+    width: 9.8em;  /* fill space to the right in fieldset -- ff, chr, saf */
+}
+
+#submit {
+    padding: 1em 0;
+}
+
+svg {
+    display: block;
+    padding-bottom: 1.5em;
+}
+
+ul {
+    margin: 0;
+    padding: 0.5em 2em;
+}
+
+.center {
+    text-align: center;
+}
+
+.column-left, .column-right {
+    flex: 50%;
+}
+
+.column-right {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.file-upload-button {
+    display: inline-block;
+    padding: 0.75em 1em;
+}
+
+/* colour & appearance */
+
+a {
+    color: #2196F3;
+}
+
+body {
+    background-color: #FAFAFA;
+}
+
+body, fieldset, h1 > a {
+    color: #212121;
+}
+
+fieldset {
+    border: none;
+}
+
+footer {
+    border-top: 1px solid #212121;
+}
+
+.file-upload-button {
+    background-color: #2196F3;
+    border-radius: 2px;
+    color: #FAFAFA;
+    cursor: pointer;
+}
+
+.flash {
+    background-color: #FFCDD2;
+    color: #D50000;
+    list-style-type: none;
+}
+
+/* typography */
+
+a {
+    text-decoration: none;
+}
+
+body, input {
+    font-family: courier, monospace;
+}
+
+#caution {
+    font-size: 0.75em;
+}
+
+footer, main {
+    font-size: 0.875em;
+}
+
+.filename {
+    word-wrap: break-word;
+}
+
+/* visibility */
+
+input[type="file"] {
+    display: none;
+}

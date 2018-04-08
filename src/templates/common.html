@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head> 
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116037942-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'UA-116037942-1');
+  </script>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="An app for the visualization of orchestration.">
+  
+  <title>orcheil</title>
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+  <link rel="stylesheet" href="//cdn.rawgit.com/necolas/normalize.css/master/normalize.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+  <script src="//code.jquery.com/jquery-latest.min.js"></script>
+  <script src="{{ url_for('static', filename='js/flowtype.js') }}"></script>
+</head>
+
+<body>
+  <header>
+    <div class="column-left">
+      <h1><a href="/">orcheil</a></h1>
+    </div>
+    
+    <div class="column-right">
+      <span><a href="faq">FAQ</a></span>
+    </div>
+  </header>
+  
+  <main>
+    {# message #}
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="center flash">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    
+    {# content #}
+    {% block content %}
+    {% endblock %}
+  </main>
+  
+  <footer>
+    Concept: <a href="https://scholar.harvard.edu/eidolan/bio" target="_blank">Emily Dolan</a><br />
+    Programming: <a href="http://gregoryleenewsome.ca" target="_blank">Gregory Lee Newsome</a>
+  </footer>
+  
+  <script>
+    $('body').flowtype({
+      minimum: 360,
+      maximum: 1200,
+      minFont: 8,
+      maxFont: 20,
+      fontRatio: 24
+    });
+  </script>
+</body>
+</html>
