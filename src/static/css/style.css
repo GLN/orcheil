@@ -23,13 +23,17 @@ fieldset {
     display: inline-block;
     padding: 0;
     text-align: left;
-    /* safari: fieldset won't resize to fit content, so hard value necessary */
-    width: 15.2732em;
 }
 
 fieldset > label {
-    float: left;
-    padding-right: 0.5em;
+    display: inline-block;
+    padding-bottom: 0.5em;
+    text-align: right;
+    width: 9em;
+}
+
+fieldset > label.last {
+    padding-bottom: 0em;
 }
 
 footer {
