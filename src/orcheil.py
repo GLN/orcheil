@@ -13,7 +13,7 @@
 # import
 # --------------------------------------------------------------------------- #
 
-import os, re, tempfile
+import os, tempfile
 
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_uploads import configure_uploads, patch_request_class, UploadNotAllowed, UploadSet
