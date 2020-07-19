@@ -65,9 +65,12 @@ def upload():
             return redirect(url_for('upload'))
         # file save successful, so continue
         palette = request.form.get('palette')
+        shape_rendering = request.form.get('shape_rendering')
+        show_dynamic = True if request.form.get('show_dynamic') else False
+        show_register = True if request.form.get('show_register') else False
         # parse file, if possible
         try:
-            score = Score(filename, palette_name)
+            score = Score(filename, palette, shape_rendering, show_dynamic, show_register) 
         except Exception as e:
             # parse error
             flash('music21 exception: {}'.format(e))
@@ -93,10 +96,13 @@ def faq():
 
 class Score(object):
     
-    def __init__(self, filename, palette):
+    def __init__(self, filename, palette, shape_rendering, show_dynamic, show_register):
         self.data = None  # music21 score data
         self.filename = filename  # can also be a path
         self.palette = palette
+        self.shape_rendering = shape_rendering
+        self.show_dynamic = show_dynamic
+        self.show_register = show_register
     
     @property
     def filename(self):
@@ -168,4 +174,5 @@ class Score(object):
         visualization['measures'] = self.measures()
         visualization['parts'] = self.parts()
         visualization['release'] = int(self.data.highestTime)
+        visualization['shape_rendering'] = self.shape_rendering
         return visualization
