@@ -276,7 +276,7 @@ class Score(object):
     def visualize(self):
         '''Create and return a score visualization, including metadata.'''
         visualization = {}
-        visualization['filename'] = os.path.split(self.filename)[-1]  # last el
+        visualization['filename'] = os.path.split(self.filename)[-1]  # last
         visualization['height'] = self.height(len(self.data.parts))
         visualization['measures'] = self.measures()
         visualization['parts'] = self.parts()
