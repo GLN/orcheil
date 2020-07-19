@@ -17,10 +17,10 @@ import os, tempfile
 
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_uploads import configure_uploads, patch_request_class, UploadNotAllowed, UploadSet
-from music21 import converter, text
+from music21 import converter, volume
 
-import const as c
 from part import Part
+import const
 import secret  # module not under version control to keep secret.key private
 
 # config
