@@ -91,41 +91,6 @@ def faq():
 # orcheil
 # --------------------------------------------------------------------------- #
 
-class Palette(object):
-    
-    def complementary(self, index):
-        '''Two-color complementary palette, with a variant for each.'''
-        index %= 4  # 4 is the color count for this palette
-        return {
-            0 : c.LIGHT_BLUE,
-            1 : c.AMBER,
-            2 : c.CYAN,
-            3 : c.ORANGE
-        }.get(index)
-    
-    def instrument(self, data):
-        '''Derive a color from part data.'''
-        if len(text.assembleLyrics(data)) > 0:
-            # lyrics are present in part, so assume it's a voice part
-            color = c.PINK
-        else:
-            # lyrics are not present in part, so derive color from instr name
-            instr = data.getInstrument().bestName()
-            for regex, color in c.INSTR_COLOR_MAP:
-                if re.search(regex, instr, re.IGNORECASE):
-                    # break on first match
-                    break
-        return color
-    
-    def monochrome(self, index):
-        '''Two-color monochrome palette.'''
-        index %= 2  # 2 is the color count for this palette
-        return {
-            0 : c.LIGHT_BLUE,
-            1 : c.CYAN
-        }.get(index)
-
-
 class Score(object):
     
     def __init__(self, filename, palette):
