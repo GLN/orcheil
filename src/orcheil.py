@@ -20,6 +20,7 @@ from flask_uploads import configure_uploads, patch_request_class, UploadNotAllow
 from music21 import converter, text
 
 import const as c
+from part import Part
 import secret  # module not under version control to keep secret.key private
 
 # config
@@ -125,72 +126,6 @@ class Palette(object):
         }.get(index)
 
 
-class Part(object):
-    
-    def __init__(self, color, data, index):
-        self.color = color
-        self.data = data  # music21 part data
-        self.index = index
-    
-    def path_with_distance(self, x1, x2):
-        '''Return a dictionary containing data for an SVG path.'''
-        d = ''  # SVG path structure: 'M x1 y h x2'
-        d += 'M '  # move to point
-        d += str(x1) + ' '  # left x coordinate
-        d += str(self.y_coordinate()) + ' '  # y coordinate
-        d += 'h '  # horizontal lineto, relative
-        d += str(x2)  # right x coordinate
-        path = {}
-        path['d'] = d
-        path['opacity'] = 1.0
-        path['stroke'] = self.color
-        path['stroke_width'] = c.STROKE_WIDTH
-        return path
-    
-    def paths(self):
-        '''Return a list of dictionaries, each containing data for an SVG path.'''
-        draw = False
-        paths = []
-        x1 = 0.0
-        x2 = 0.0
-        # flatten and filter for note, chord, and rest
-        notes = self.data.flat.notesAndRests
-        # delimit stream by rest
-        notes = notes.findConsecutiveNotes()
-        # append a trailing None to ensure the final path is created
-        notes.append(None)
-        # create SVG path
-        for note in notes:
-            if note is not None:
-                if draw is False:
-                    # path start
-                    x1 = note.offset
-                    # reset
-                    draw = True
-                # path accumulate to next rest (None)
-                x2 += note.duration.quarterLength
-            else:
-                # create path
-                path = self.path_with_distance(x1, x2)
-                # save path
-                paths.append(path)
-                # reset
-                draw = False
-                x2 = 0.0
-        return paths
-    
-    def visualize(self):
-        '''Create and return a part visualization, including metadata.'''
-        visualization = {}
-        visualization['name'] = self.data.partName
-        visualization['paths'] = self.paths()
-        return visualization
-    
-    def y_coordinate(self):
-        '''Calculate and return the y coordinate for an SVG path.'''
-        return c.Y_INDENT + (c.STROKE_WIDTH * self.index) + (c.GAP * self.index)
-
-
 class Score(object):
     
     def __init__(self, filename, palette):
@@ -245,21 +180,10 @@ class Score(object):
     
     def parts(self):
         '''Return a list of part visualizations.'''
-        palette = Palette()
         parts = []
         for index, data in enumerate(self.data.parts):
-            # create color
-            color = None
-            if self.palette == 'complementary':
-                color = palette.complementary(index)
-            if self.palette == 'instrument':
-                color = palette.instrument(data)
-            if self.palette == 'monochrome':
-                color = palette.monochrome(index)
-            # if color is None, use default
-            color = c.GRAY if color is None else color
             # create part
-            part = Part(color, data, index)
+            part = Part(data, index, self.palette, self.show_dynamic, self.show_register)
             # visualize part and keep the result
             parts.append(part.visualize())
         return parts
