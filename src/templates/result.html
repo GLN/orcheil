@@ -2,7 +2,7 @@
 
 {% block content %}
   
-  <svg height="{{ score.height }}" width="100%" viewBox="0 0 {{ score.release }} {{ score.height }}" preserveAspectRatio="none">
+  <svg height="{{ score.height }}" width="100%" viewBox="0 0 {{ score.release }} {{ score.height }}" preserveAspectRatio="none" shape-rendering="{{ score.shape_rendering }}">
     {% for part in score.parts %}
       {% for path in part.paths %}
         <path d="{{ path.d }}" opacity="{{ path.opacity }}" stroke="{{ path.stroke }}" stroke-width="{{ path.stroke_width }}"><title>{{ part.name }}</title></path>
