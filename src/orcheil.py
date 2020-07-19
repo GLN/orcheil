@@ -63,7 +63,7 @@ def upload():
             flash('You must choose a .musicxml, .mxl, or .xml file.')
             return redirect(url_for('upload'))
         # file save successful, so continue
-        palette_name = request.form.get('palette')
+        palette = request.form.get('palette')
         # parse file, if possible
         try:
             score = Score(filename, palette_name)
