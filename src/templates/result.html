@@ -8,6 +8,11 @@
         <path d="{{ path.d }}" opacity="{{ path.opacity }}" stroke="{{ path.stroke }}" stroke-width="{{ path.stroke_width }}"><title>{{ part.name }}</title></path>
       {% endfor %}
     {% endfor %}
+
+    {% for measure in score.measures %}
+      <text font-size="0.5625em" lengthAdjust="spacingAndGlyphs" textLength="{{ measure.text_length }}" x="{{ measure.x }}" y="{{ measure.y }}">{{ measure.number }}</text>
+    {% endfor %}
+
     Sorry, your browser does not support inline SVG.
   </svg>
   

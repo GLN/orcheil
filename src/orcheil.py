@@ -212,6 +212,36 @@ class Score(object):
         '''Calculate and return the height for the SVG element.'''
         return (c.STROKE_WIDTH * part_count) + (c.GAP * (part_count - 1))
         
+        return (const.STROKE_WIDTH * part_count) + (const.GAP * (part_count - 1)) + const.TEXT_HEIGHT
+    
+    def measure(self, number, text_length, x, y):
+        '''Return a dictionary containing data for a measure.'''        
+        measure = {}
+        measure['number'] = number
+        measure['text_length'] = text_length
+        measure['x'] = x
+        measure['y'] = y
+        return measure
+    
+    def measures(self):
+        '''Return a list of dictionaries, one per measure.
+           This is solely for creating and positioning measure numbers.'''
+        measure_map = self.data.measureOffsetMap()
+        measures = []
+        x = 0.0
+        y = self.height(len(self.data.parts))  # height of SVG element
+        for key, value in measure_map.items():
+            uppermost_measure = value[0]  # value = list of measures with same #
+            number = uppermost_measure.number
+            x = key  # key is the measure offset
+            # draw measure number, include 1 but not 0 (i.e. partial measure)
+            if number % const.MEASURE_RESOLUTION is 0 and number is not 0 or number is 1:
+                number = str(number)
+                text_length = self.text_length(number)
+                measure = self.measure(number, text_length, x, y)
+                measures.append(measure)
+        return measures
+    
     def parts(self):
         '''Return a list of part visualizations.'''
         palette = Palette()
@@ -233,11 +263,21 @@ class Score(object):
             parts.append(part.visualize())
         return parts
     
+    def text_length(self, number):
+        '''Return an SVG text length for a given number length.
+           This is the container size for a measure number, to mitigate scaling.'''
+        return {
+            1: const.SINGLE_DIGIT,
+            2: const.DOUBLE_DIGIT,
+            3: const.TRIPLE_DIGIT
+        }.get(len(number), '0.75em')  # default to 0.75em, i.e. 12/16 em
+    
     def visualize(self):
         '''Create and return a score visualization, including metadata.'''
         visualization = {}
         visualization['filename'] = os.path.split(self.filename)[-1]  # last el
         visualization['height'] = self.height(len(self.data.parts))
+        visualization['measures'] = self.measures()
         visualization['parts'] = self.parts()
         visualization['release'] = int(self.data.highestTime)
         return visualization
