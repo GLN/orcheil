@@ -146,8 +146,6 @@ class Score(object):
     
     def height(self, part_count):
         '''Calculate and return the height for the SVG element.'''
-        return (c.STROKE_WIDTH * part_count) + (c.GAP * (part_count - 1))
-        
         return (const.STROKE_WIDTH * part_count) + (const.GAP * (part_count - 1)) + const.TEXT_HEIGHT
     
     def measure(self, number, text_length, x, y):
