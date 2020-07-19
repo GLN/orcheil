@@ -1,2 +1,5 @@
 
+**/.DS_Store
 src/secret.py
+src/__pycache__/
+src/tmp/
